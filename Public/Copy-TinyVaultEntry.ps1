@@ -16,7 +16,6 @@ function Copy-TinyVaultEntry {
         [Int]$Id
     )
     $path = "$env:USERPROFILE\vault.json"
-    $vaultFile = Split-Path $path -Leaf
 
     if (Test-Path $path) {
         Write-Verbose "Found $path file"
@@ -25,11 +24,11 @@ function Copy-TinyVaultEntry {
             $obj = $json | ConvertFrom-Json 
         }
         else {
-            Write-Error "$vaultFile is empty. Nothing to copy here."; return
+            Write-Error "$path is empty. Nothing to copy here."; return
         }    
     }
     else {
-        Write-Error "No $vaultFile found in the current directory"; return
+        Write-Error "No vault file found in: $path"; return
     }
   
     Write-Verbose "Decrypting password.."

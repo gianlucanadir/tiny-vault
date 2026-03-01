@@ -23,7 +23,6 @@ function Edit-TinyVaultEntry {
     )
 
     $path = "$env:USERPROFILE\vault.json"
-    $vaultFile = Split-Path $path -Leaf
 
     if (Test-Path $path) {
         Write-Verbose "Found $path file"
@@ -61,6 +60,6 @@ function Edit-TinyVaultEntry {
         }
     }
     else {
-        Write-Error "No $vaultFile found in the current directory"; return
+        Write-Error "No vault file found in: $path"; return
     }
 }
