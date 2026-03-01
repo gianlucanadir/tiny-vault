@@ -19,7 +19,6 @@ function Add-TinyVaultEntry {
         [ValidateNotNullOrEmpty()]
         [String]$Name,
 
-        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [ValidateSet("Prod", "NoProd")]
         [String]$Env
