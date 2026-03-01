@@ -1,31 +1,39 @@
 <#
 .SYNOPSIS
-  A short one-line action-based description, e.g. 'Tests if a function is valid'
+Import the vault from a csv file
+
 .DESCRIPTION
-  A longer description of the function, its purpose, common use cases, etc.
-.NOTES
-  Information or caveats about the function e.g. 'This function is not supported in Linux'
-.LINK
-  Specify a URI to a help page, this will show when Get-Help -Online is used.
+Create your vault by import numerous entries from a csv file
+
 .EXAMPLE
-  Test-MyTestFunction -Verbose
-  Explanation of the function or its result. You can include multiple examples with additional .EXAMPLE lines
+Import-TinyVaultCsv -CsvFile data.csv
 #>
 function Import-TinyVaultCsv {
-  [CmdletBinding()]
-  param (
-    [String]$CsvFile
-  )
-  $x = Import-Csv $CsvFile
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [String]$CsvFile
+    )
 
-  $vault = @{}
-  $x | ForEach-Object {
-    $secure = ConvertTo-SecureString $_.password -AsPlainText -Force
-    $encrypted = ConvertFrom-SecureString $secure
-    $vault[$_.name] = $encrypted
-  }
+    $out = ".\encrypted.json"
+    $csv = Import-Csv $CsvFile
 
-  Write-Output $vault
-  $y = ConvertTo-Json $vault
-  $y | Out-File .\encrypted.json
+    if (-not (Test-Path $CsvFile)) { Write-Error "File not found."; return }
+    if ([System.IO.Path]::GetExtension($CsvFile) -ne ".csv") { Write-Error "File $CsvFile must be a .csv."; return }
+
+    Write-Verbose "Reading $CsvFile file..."
+    $content = Get-Content $CsvFile
+
+    if (-not $content) { Write-Error "File $CsvFile is empty."; return }
+
+    for ($i = 0; $i -lt $csv.length; $i++) {
+        $csv[$i] | Add-Member -NotePropertyName "id" -NotePropertyValue $i
+        $secure = ConvertTo-SecureString $csv[$i].password -AsPlainText -Force
+        $encrypted = ConvertFrom-SecureString $secure
+        $csv[$i].password = $encrypted
+    }
+
+    Write-Verbose "Generating $out file..."
+    $vault = ConvertTo-Json $csv
+    $vault | Out-File $out
 }

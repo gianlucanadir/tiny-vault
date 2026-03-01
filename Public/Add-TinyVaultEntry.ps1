@@ -1,40 +1,60 @@
 <#
 .SYNOPSIS
-  A short one-line action-based description, e.g. 'Tests if a function is valid'
+Add a new entry in the Vault
+
 .DESCRIPTION
-  A longer description of the function, its purpose, common use cases, etc.
-.NOTES
-  Information or caveats about the function e.g. 'This function is not supported in Linux'
-.LINK
-  Specify a URI to a help page, this will show when Get-Help -Online is used.
+A function for adding new entries in the Vault
+
 .EXAMPLE
-  Test-MyTestFunction -Verbose
-  Explanation of the function or its result. You can include multiple examples with additional .EXAMPLE lines
+Add-TintyVault -Title AD -Name john@mail.com -Env Prod 
 #>
 function Add-TinyVaultEntry {
-  [CmdletBinding()]
-  param (
-    [String]$Name,
-    [String]$Password,
-    [String]$Env
-  )
-  $path = ".\encrypted.json"
-  $vault = @{}
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [String]$Title,
 
-  if (Test-Path $path) {
-    $json = Get-Content $path
-    if ($json) {
-      $obj = $json | ConvertFrom-Json 
-      foreach ($prop in $obj.Psobject.properties) {
-        $vault[$prop.name] = $prop.value
-      }
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [String]$Name,
+
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet("Prod", "NoProd")]
+        [String]$Env
+    )
+
+    do {
+        $password = Read-Host -AsSecureString "Insert Password"
+        if ($password.Length -eq 0) { Write-Host "Password is required." }
+    } while ($password.Length -eq 0)
+
+    Write-Verbose "Encrypting password..."
+    $encrypted = ConvertFrom-SecureString $password
+
+    $path = ".\encrypted.json"
+
+    if (Test-Path $path) {
+        Write-Verbose "Found $path file"
+        $vault = @(Get-Content $path | ConvertFrom-Json)
     }
-  }
+    else {
+        Write-Verbose "No $path file found"
+        $vault = @{}
+    }
 
-  $secure = ConvertTo-SecureString $Password -AsPlainText -Force
-  $encrypted = ConvertFrom-SecureString $secure
-  $vault[$Name] = $encrypted
-  $vault | ConvertTo-Json | Out-File $path
+    $maxId = if ($vault.Count -gt 0) { ($vault | Measure-Object -Property id -Maximum).Maximum } else { -1 }
 
-  Write-Output $vault
+    Write-Verbose "Adding new entry..."
+    $vault += [PSCustomObject]@{
+        id       = $maxId + 1
+        title    = $Title
+        name     = $Name
+        env      = $Env
+        password = $encrypted        
+    }
+
+    Write-Verbose "Generating json file..."
+    $vault | ConvertTo-Json | Out-File $path
 }
