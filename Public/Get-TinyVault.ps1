@@ -3,13 +3,13 @@
 Get the TinyVault object
 
 .DESCRIPTION
-Get the TinyVault object fromt the encrypted.json file
+Get the TinyVault object fromt the vault.json file
 
 .EXAMPLE
 Get-TinyVault
 #>
 function Get-TinyVault {
-    $path = ".\encrypted.json"
+    $path = "$env:USERPROFILE\vault.json"
     $vaultFile = Split-Path $path -Leaf
 
     if (-not (Test-Path $path)) {

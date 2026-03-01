@@ -22,7 +22,7 @@ function Edit-TinyVaultEntry {
         [String]$NewEnv
     )
 
-    $path = ".\encrypted.json"
+    $path = "$env:USERPROFILE\vault.json"
     $vaultFile = Split-Path $path -Leaf
 
     if (Test-Path $path) {

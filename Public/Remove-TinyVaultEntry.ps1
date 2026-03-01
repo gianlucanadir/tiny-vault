@@ -14,7 +14,7 @@ function Remove-TinyVaultEntry {
         [Int]$Id
     )
 
-    $path = ".\encrypted.json"
+    $path = "$env:USERPROFILE\vault.json"
 
     if (Test-Path $path) {
         Write-Verbose "Found $path file"

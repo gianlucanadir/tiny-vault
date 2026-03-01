@@ -15,7 +15,7 @@ function Copy-TinyVaultEntry {
         [ValidateRange(0, [int]::MaxValue)]
         [Int]$Id
     )
-    $path = ".\encrypted.json"
+    $path = "$env:USERPROFILE\vault.json"
     $vaultFile = Split-Path $path -Leaf
 
     if (Test-Path $path) {

@@ -15,7 +15,7 @@ function Import-TinyVaultCsv {
         [String]$CsvFile
     )
 
-    $out = ".\encrypted.json"
+    $out = "$env:USERPROFILE\vault.json"
     $csv = Import-Csv $CsvFile
 
     if (-not (Test-Path $CsvFile)) { Write-Error "File not found."; return }

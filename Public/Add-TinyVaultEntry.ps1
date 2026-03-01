@@ -33,7 +33,7 @@ function Add-TinyVaultEntry {
     Write-Verbose "Encrypting password..."
     $encrypted = ConvertFrom-SecureString $password
 
-    $path = ".\encrypted.json"
+    $path = "$env:USERPROFILE\vault.json"
 
     if (Test-Path $path) {
         Write-Verbose "Found $path file"
