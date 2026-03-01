@@ -6,7 +6,7 @@ Add a new entry in the Vault
 A function for adding new entries in the Vault
 
 .EXAMPLE
-Add-TintyVault -Title AD -Name john@mail.com -Env Prod 
+Add-TintyVault -Title Github -Name user@mail.com -Env Prod 
 #>
 function Add-TinyVaultEntry {
     [CmdletBinding()]
