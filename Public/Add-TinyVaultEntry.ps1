@@ -36,14 +36,14 @@ function Add-TinyVaultEntry {
 
     if (Test-Path $path) {
         Write-Verbose "Found $path file"
-        $vault = @(Get-Content $path | ConvertFrom-Json)
+        $vault = @(Get-Content $path -Raw | ConvertFrom-Json)
     }
     else {
         Write-Verbose "No $path file found"
-        $vault = @{}
+        $vault = @()
     }
 
-    $maxId = if ($vault.Count -gt 0) { ($vault | Measure-Object -Property id -Maximum).Maximum } else { -1 }
+    $maxId = if ($vault.Count -gt 0) { [int]($vault | Measure-Object -Property id -Maximum).Maximum } else { -1 }
 
     Write-Verbose "Adding new entry..."
     $vault += [PSCustomObject]@{
