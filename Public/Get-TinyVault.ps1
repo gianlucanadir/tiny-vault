@@ -16,5 +16,7 @@ function Get-TinyVault {
     }
 
     $json = Get-Content $path -Raw
-    return ($json | ConvertFrom-Json)
+    $vault = $json | ConvertFrom-Json | Select-Object Id, Title, Name, Env
+
+    $vault
 }
