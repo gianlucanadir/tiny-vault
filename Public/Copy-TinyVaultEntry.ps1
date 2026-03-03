@@ -39,8 +39,4 @@ function Copy-TinyVaultEntry {
 
     Write-Verbose "Copying password to the clipboard..."
     Set-Clipboard $plainPassword
-
-    Start-Process powershell `
-        -WindowStyle Hidden `
-        -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"TinyVault\Private\Clear-Clipboard.ps1`" -secret `"$plainPassword`""
 }
