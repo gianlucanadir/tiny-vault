@@ -27,7 +27,7 @@ Import-TinyVaultCsv -CsvFile data.csv
 function Import-TinyVaultCsv {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, Position = 0)]
         [String]$CsvFile
     )
 
