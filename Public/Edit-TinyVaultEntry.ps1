@@ -11,7 +11,7 @@ Edit-TinyVaultEntry -Id 1 -NewTitle Github -NewName user@mail.com -NewEnv NoProd
 function Edit-TinyVaultEntry {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, Position = 0)]
         [ValidateRange(0, [int]::MaxValue)]
         [Int]$Id,
 

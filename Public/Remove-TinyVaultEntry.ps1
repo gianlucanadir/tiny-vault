@@ -11,6 +11,7 @@ Remove-TinyVaultEntry -Id 1
 function Remove-TinyVaultEntry {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $true, Position = 0)]
         [Int]$Id
     )
 

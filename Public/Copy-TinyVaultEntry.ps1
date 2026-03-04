@@ -11,7 +11,7 @@ Copy-TinyVault Entry -Id 1
 function Copy-TinyVaultEntry {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, Position = 0)]
         [ValidateRange(0, [int]::MaxValue)]
         [Int]$Id
     )
