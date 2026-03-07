@@ -31,13 +31,9 @@ function Copy-TinyVaultEntry {
         Write-Error "No vault file found in: $path"; return $false
     }
   
-    Write-Verbose "Decrypting password.."
     $password = $obj | Where-Object id -EQ $Id | Select-Object -ExpandProperty password
-    $secure = ConvertTo-SecureString $password
-    $ptr = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
-    $plainPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr)
 
     Write-Verbose "Copying password to the clipboard..."
-    Set-Clipboard $plainPassword 
+    Set-Clipboard $password 
     return $true
 }

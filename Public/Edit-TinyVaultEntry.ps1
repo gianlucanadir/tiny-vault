@@ -32,10 +32,13 @@ function Edit-TinyVaultEntry {
             $entry = $vault | Where-Object Id -EQ $Id
 
             $newPassword = Read-Host -AsSecureString "New Password (press ENTER to keep current)"
+            $plainPassword = [Runtime.InteropServices.Marshal]::PtrToStringBSTR(
+                [Runtime.InteropServices.Marshal]::SecureStringToBSTR($newPassword)
+            )
 
             if ($newPassword.Length) {
                 Write-Verbose "Adding new password.."
-                $entry.password = ConvertFrom-SecureString $newPassword
+                $entry.password = $plainPassword            
             }
 
             if ($NewTitle.Length) {

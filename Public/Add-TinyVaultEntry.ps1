@@ -29,8 +29,9 @@ function Add-TinyVaultEntry {
         if ($password.Length -eq 0) { Write-Host "Password is required." }
     } while ($password.Length -eq 0)
 
-    Write-Verbose "Encrypting password..."
-    $encrypted = ConvertFrom-SecureString $password
+    $plainPassword = [Runtime.InteropServices.Marshal]::PtrToStringBSTR(
+        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
+    )
 
     $path = "$env:USERPROFILE\vault.json"
 
@@ -51,7 +52,7 @@ function Add-TinyVaultEntry {
         title    = $Title
         name     = $Name
         env      = $Env
-        password = $encrypted        
+        password = $plainPassword
     }
 
     Write-Verbose "Generating json file..."

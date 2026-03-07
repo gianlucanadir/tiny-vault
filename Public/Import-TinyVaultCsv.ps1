@@ -44,9 +44,6 @@ function Import-TinyVaultCsv {
 
     for ($i = 0; $i -lt $csv.length; $i++) {
         $csv[$i] | Add-Member -NotePropertyName "id" -NotePropertyValue $i
-        $secure = ConvertTo-SecureString $csv[$i].password -AsPlainText -Force
-        $encrypted = ConvertFrom-SecureString $secure
-        $csv[$i].password = $encrypted
     }
 
     Write-Verbose "Generating $out file..."
