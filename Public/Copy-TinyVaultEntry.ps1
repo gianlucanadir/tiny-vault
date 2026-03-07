@@ -15,11 +15,12 @@ function Copy-TinyVaultEntry {
         [ValidateRange(0, [int]::MaxValue)]
         [Int]$Id
     )
-    $path = "$env:USERPROFILE\vault.json"
+    $path = $Script:VaultPath
 
     if (Test-Path $path) {
         Write-Verbose "Found $path file"
-        $json = Get-Content $path
+        Write-Verbose "Decrypting vault..."
+        $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
         if ($json) {
             $obj = $json | ConvertFrom-Json 
         }

@@ -31,7 +31,6 @@ function Import-TinyVaultCsv {
         [String]$CsvFile
     )
 
-    $out = "$env:USERPROFILE\vault.json"
     $csv = Import-Csv $CsvFile
 
     if (-not (Test-Path $CsvFile)) { Write-Error "File not found."; return }
@@ -45,8 +44,9 @@ function Import-TinyVaultCsv {
     for ($i = 0; $i -lt $csv.length; $i++) {
         $csv[$i] | Add-Member -NotePropertyName "id" -NotePropertyValue $i
     }
-
-    Write-Verbose "Generating $out file..."
-    $vault = ConvertTo-Json $csv
-    $vault | Out-File $out
+    
+    Write-Verbose "Encrypting vault..."
+    $json = ConvertTo-Json $csv
+    Protect-TinyVault -Json $json -MasterPassword $script:MasterPassword
+    Write-Verbose "Vault saved."
 }

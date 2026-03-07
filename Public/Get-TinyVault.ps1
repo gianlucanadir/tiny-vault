@@ -9,14 +9,12 @@ Get the TinyVault object fromt the vault.json file
 Get-TinyVault
 #>
 function Get-TinyVault {
-    $path = "$env:USERPROFILE\vault.json"
-
-    if (-not (Test-Path $path)) {
-        Write-Error "No vault file found in: $path"; return
+    if (-not (Test-Path $Script:VaultPath)) {
+        Write-Error "No vault file found in: $Script:VaultPath"; return
     }
 
-    $json = Get-Content $path -Raw
+    Write-Verbose "Decrypting vault..."
+    $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
     $vault = $json | ConvertFrom-Json | Select-Object Id, Title, Name, Env
-
     $vault
 }

@@ -33,11 +33,13 @@ function Add-TinyVaultEntry {
         [Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
     )
 
-    $path = "$env:USERPROFILE\vault.json"
+    $path = $Script:VaultPath
 
     if (Test-Path $path) {
         Write-Verbose "Found $path file"
-        $vault = @(Get-Content $path -Raw | ConvertFrom-Json)
+        Write-Verbose "Decrypting vault..."
+        $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
+        $vault = @($json | ConvertFrom-Json)
     }
     else {
         Write-Verbose "No $path file found"
@@ -55,6 +57,9 @@ function Add-TinyVaultEntry {
         password = $plainPassword
     }
 
-    Write-Verbose "Generating json file..."
-    $vault | ConvertTo-Json | Out-File $path
+    
+    Write-Verbose "Encrypting vault..."
+    $json = ConvertTo-Json $vault
+    Protect-TinyVault -Json $json -MasterPassword $script:MasterPassword
+    Write-Verbose "Vault saved."
 }

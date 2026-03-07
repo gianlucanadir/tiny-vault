@@ -22,11 +22,13 @@ function Edit-TinyVaultEntry {
         [String]$NewEnv
     )
 
-    $path = "$env:USERPROFILE\vault.json"
+    $path = $Script:VaultPath
 
     if (Test-Path $path) {
         Write-Verbose "Found $path file"
-        $json = Get-Content $path
+        Write-Verbose "Decrypting vault..."
+        $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
+
         if ($json) {
             $vault = $json | ConvertFrom-Json 
             $entry = $vault | Where-Object Id -EQ $Id
@@ -55,8 +57,11 @@ function Edit-TinyVaultEntry {
                 Write-Verbose "Adding new env.."
                 $entry.env = $NewEnv
             }        
-            Write-Verbose "Generating json file..."
-            $vault | ConvertTo-Json | Out-File $path
+
+            Write-Verbose "Encrypting vault..."
+            $json = ConvertTo-Json $vault
+            Protect-TinyVault -Json $json -MasterPassword $script:MasterPassword
+            Write-Verbose "Vault saved."
         }
         else {
             Write-Error "$vaultFile is empty. Nothing to edit here."; return
