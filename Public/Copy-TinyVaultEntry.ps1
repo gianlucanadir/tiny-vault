@@ -24,11 +24,11 @@ function Copy-TinyVaultEntry {
             $obj = $json | ConvertFrom-Json 
         }
         else {
-            Write-Error "$path is empty. Nothing to copy here."; return
+            Write-Error "$path is empty. Nothing to copy here."; return $false
         }    
     }
     else {
-        Write-Error "No vault file found in: $path"; return
+        Write-Error "No vault file found in: $path"; return $false
     }
   
     Write-Verbose "Decrypting password.."
@@ -38,5 +38,6 @@ function Copy-TinyVaultEntry {
     $plainPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr)
 
     Write-Verbose "Copying password to the clipboard..."
-    Set-Clipboard $plainPassword
+    Set-Clipboard $plainPassword 
+    return $true
 }
