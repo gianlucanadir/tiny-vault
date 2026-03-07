@@ -24,16 +24,15 @@ function Copy-TinyVaultEntry {
             $obj = $json | ConvertFrom-Json 
         }
         else {
-            Write-Error "$path is empty. Nothing to copy here."; return $false
+            throw "$path is empty. Nothing to copy here."
         }    
     }
     else {
-        Write-Error "No vault file found in: $path"; return $false
+        throw "No vault file found in: $path"
     }
   
     $password = $obj | Where-Object id -EQ $Id | Select-Object -ExpandProperty password
 
     Write-Verbose "Copying password to the clipboard..."
     Set-Clipboard $password 
-    return $true
 }
