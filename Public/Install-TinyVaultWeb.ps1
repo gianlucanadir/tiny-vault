@@ -24,6 +24,6 @@ function Install-TinyVaultWeb {
         Invoke-WebRequest -Uri $uriBat -OutFile $webDir
     }
     catch {
-        throw "Error: Cannot download files from $uriPs1"
+        throw "Error downloading files: $($_.Exception.Message)"
     }
 }

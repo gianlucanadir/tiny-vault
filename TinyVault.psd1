@@ -12,7 +12,7 @@
     RootModule        = 'TinyVault.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '2.0.0'
+    ModuleVersion     = '2.0.1'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -116,7 +116,10 @@
             # IconUri = ''
 
             # ReleaseNotes of this module
-            ReleaseNotes = 'ReleaseNotes = "Initial release. AES-256 encrypted vault with master password, CSV import, and optional local web interface."'
+            ReleaseNotes = @"
+            2.0.1: Fixed Install-TinyVaultWeb error message on download failure.
+            2.0.0: Initial release. AES-256 encrypted vault with master password, CSV import, and optional local web interface.
+"@
 
             # Prerelease string of this module
             # Prerelease = ''
