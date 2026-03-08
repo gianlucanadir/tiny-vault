@@ -1,3 +1,13 @@
+<#
+.SYNOPSIS
+Set the TinyVault master password
+
+.DESCRIPTION
+Change the TinyVault master password
+
+.EXAMPLE
+Set-TinyVaultMasterPassword
+#>
 function Set-TinyVaultMasterPassword {
     $oldPassword = Read-Host -AsSecureString "Current Master Password"
     
