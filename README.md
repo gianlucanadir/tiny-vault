@@ -97,3 +97,6 @@ The vault is stored at `$HOME\.tinyvault\vault.json` as an AES-256 encrypted bin
 - The master password is never stored on disk
 - Key derivation uses PBKDF2 with a random salt and 100,000 iterations
 - The web server is local only and not intended to be exposed to a network
+
+
+> This software is provided as-is. Use at your own risk. The author is not responsible for any data loss or security issues.
