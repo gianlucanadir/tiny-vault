@@ -30,10 +30,10 @@
     Copyright         = '(c) gianlucanadir. All rights reserved.'
 
     # Description of the functionality provided by this module
-    # Description = ''
+    Description       = 'A lightweight, encrypted password manager for PowerShell. Stores credentials in an AES-256 encrypted vault secured by a master password, with an optional local web interface for browser-based access.'
 
     # Minimum version of the PowerShell engine required by this module
-    # PowerShellVersion = ''
+    PowerShellVersion = '7.0'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''
@@ -104,19 +104,19 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags         = @("password", "vault", "security", "encryption", "credentials")
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri   = 'https://github.com/gianlucanadir/tiny-vault/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri   = 'https://github.com/gianlucanadir/tiny-vault'
 
             # A URL to an icon representing this module.
             # IconUri = ''
 
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = 'ReleaseNotes = "Initial release. AES-256 encrypted vault with master password, CSV import, and optional local web interface."'
 
             # Prerelease string of this module
             # Prerelease = ''
