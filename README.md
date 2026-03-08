@@ -20,20 +20,10 @@ Built for restricted environments where installing third-party software is not a
 
 ## Installation
 
-Copy the `TinyVault` folder to your PowerShell modules directory:
-
-```
-$HOME\Documents\PowerShell\Modules\TinyVault\
-```
-
-Then import the module:
-
+Available on [PowerShell Gallery](https://www.powershellgallery.com/packages/TinyVault).
 ```powershell
-Import-Module TinyVault
-# TinyVault Master Password: ****
+Install-Module TinyVault
 ```
-
-The master password is requested once at import and held in memory for the session.
 
 ## Commands
 
