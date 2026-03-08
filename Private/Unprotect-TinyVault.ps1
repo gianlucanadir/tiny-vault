@@ -20,6 +20,11 @@ function Unprotect-TinyVault {
     $aes.Key = $key
     $aes.IV = $iv
 
-    $decrypted = $aes.CreateDecryptor().TransformFinalBlock($encrypted, 0, $encrypted.Length)
+    try {
+        $decrypted = $aes.CreateDecryptor().TransformFinalBlock($encrypted, 0, $encrypted.Length)
+    }
+    catch {
+        throw "Wrong master password or corrupted vault."    
+    }
     return [Text.Encoding]::UTF8.GetString($decrypted)
 }

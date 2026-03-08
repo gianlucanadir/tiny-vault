@@ -14,7 +14,14 @@ function Get-TinyVault {
     }
 
     Write-Verbose "Decrypting vault..."
-    $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
+
+    try {
+        $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
+    }
+    catch {
+        Write-Error $_.Exception.Message
+        return
+    }
     $vault = $json | ConvertFrom-Json | Select-Object Id, Title, Name, Env
     $vault
 }

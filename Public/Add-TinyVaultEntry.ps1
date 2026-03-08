@@ -24,27 +24,34 @@ function Add-TinyVaultEntry {
         [String]$Env
     )
 
-    do {
-        $password = Read-Host -AsSecureString "Insert Password"
-        if ($password.Length -eq 0) { Write-Host "Password is required." }
-    } while ($password.Length -eq 0)
-
-    $plainPassword = [Runtime.InteropServices.Marshal]::PtrToStringBSTR(
-        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
-    )
-
     $path = $Script:VaultPath
 
     if (Test-Path $path) {
         Write-Verbose "Found $path file"
         Write-Verbose "Decrypting vault..."
-        $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
+
+        try {
+            $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
+        }
+        catch {
+            Write-Error $_.Exception.Message
+            return
+        }
         $vault = @($json | ConvertFrom-Json)
     }
     else {
         Write-Verbose "No $path file found"
         $vault = @()
     }
+
+    do {
+        $password = Read-Host -AsSecureString "Insert Password for $Title"
+        if ($password.Length -eq 0) { Write-Host "Password is required." }
+    } while ($password.Length -eq 0)
+
+    $plainPassword = [Runtime.InteropServices.Marshal]::PtrToStringBSTR(
+        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
+    )
 
     $maxId = if ($vault.Count -gt 0) { [int]($vault | Measure-Object -Property id -Maximum).Maximum } else { -1 }
 
@@ -56,7 +63,6 @@ function Add-TinyVaultEntry {
         env      = $Env
         password = $plainPassword
     }
-
     
     Write-Verbose "Encrypting vault..."
     $json = ConvertTo-Json $vault

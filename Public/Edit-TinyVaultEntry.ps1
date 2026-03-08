@@ -27,7 +27,14 @@ function Edit-TinyVaultEntry {
     if (Test-Path $path) {
         Write-Verbose "Found $path file"
         Write-Verbose "Decrypting vault..."
-        $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
+
+        try {
+            $json = Unprotect-TinyVault -MasterPassword $script:MasterPassword
+        }
+        catch {
+            Write-Error $_.Exception.Message
+            return
+        }
 
         if ($json) {
             $vault = $json | ConvertFrom-Json 
