@@ -9,20 +9,19 @@ Create your vault by import numerous entries from a csv file
 An example of data.csv file:
 
 title,name,env,password
-Github,john@mail.com,Prod,D0ntJudg3M3!
-Discord,paul@mail.com,NoProd,SuperP4ssw0rd123
-Steam,luke@mail.com,,TryH@ckM3
+Jira,john@mail.com,Prod,D0ntJudg3M3!
+Confluence,john@mail.com,Staging,SuperP4ssw0rd123
+Jenkins,john@mail.com,Dev,TryH@ckM3
 
 Import-TinyVaultCsv -CsvFile data.csv
 
-+----------+------------------+--------+------------------+
-| Title    | Name             | Env    | Password         |
-+----------+------------------+--------+------------------+
-| Github   | john@mail.com    | Prod   | D0ntJudg3M3!     |
-| Discord  | paul@mail.com    | NoProd | SuperP4ssw0rd123 |
-| Steam    | luke@mail.com    |        | TryH@ckM3        |
-+----------+------------------+--------+------------------+
-
++-------------+------------------+---------+------------------+
+| Title       | Name             | Env     | Password         |
++-------------+------------------+---------+------------------+
+| Jira        | john@mail.com    | Prod    | D0ntJudg3M3!     |
+| Confluence  | john@mail.com    | Staging | SuperP4ssw0rd123 |
+| Jenkins     | john@mail.com    | Dev     | TryH@ckM3        |
++-------------+------------------+---------+------------------+
 #>
 function Import-TinyVaultCsv {
     [CmdletBinding()]

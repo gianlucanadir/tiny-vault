@@ -6,7 +6,7 @@ Edit a entry in the Vault
 A function that allows to edit an existing entry by Id
 
 .EXAMPLE
-Edit-TinyVaultEntry -Id 1 -NewTitle Github -NewName user@mail.com -NewEnv NoProd
+Edit-TinyVaultEntry -Id 0 -NewTitle Jira -NewName john@mail.com -NewEnv Staging
 #>
 function Edit-TinyVaultEntry {
     [CmdletBinding()]
