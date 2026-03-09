@@ -80,8 +80,12 @@ Jenkins,john@mail.com,Dev,TryH@ckM3
 
 A local web server is available as a separate download. It provides a browser UI to view entries and copy passwords to clipboard. Passwords are never sent over the network — copying is handled server-side via `Set-Clipboard`.
 
-To download and install the web interface:
+![TinyVault Web Interface](demo.gif)
 
+The web interface supports full keyboard navigation for a faster experience — no mouse required.
+Press `↓` / `↑` to navigate entries, `Enter` to copy the selected password, `/` to search, `1` / `2` / `3` to filter by environment, and `Esc` to exit the search bar.
+
+To download and install the web interface:
 ```powershell
 Install-TinyVaultWeb
 ```
