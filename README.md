@@ -83,7 +83,7 @@ A local web server is available as a separate download. It provides a browser UI
 ![TinyVault Web Interface](demo.gif)
 
 The web interface supports full keyboard navigation for a faster experience. No mouse required.
-Press `↓` / `↑` to navigate entries, `Enter` to copy the selected password, `/` to search, `1` / `2` / `3` to filter by environment, and `Esc` to exit the search bar.
+Press `↓` / `↑` to navigate entries, `Enter` to copy the selected password, `t` to copy the selected title, `n` to copy the selected name, `/` to search, `1` / `2` / `3` to filter by environment, and `Esc` to exit the search bar.
 
 To download and install the web interface:
 ```powershell
