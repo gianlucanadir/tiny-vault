@@ -12,7 +12,7 @@
     RootModule        = 'TinyVault.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '2.0.1'
+    ModuleVersion     = '2.1.1'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -77,7 +77,8 @@
         'Remove-TinyVaultEntry',
         'Edit-TinyVaultEntry',
         'Set-TinyVaultMasterPassword',
-        'Install-TinyVaultWeb'
+        'Install-TinyVaultWeb',
+        'Start-TinyVaultWeb'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -117,6 +118,7 @@
 
             # ReleaseNotes of this module
             ReleaseNotes = @"
+            2.1.1: Add Start-TinyVaultWeb to easily start the web server
             2.0.1: Fixed Install-TinyVaultWeb error message on download failure.
             2.0.0: Initial release. AES-256 encrypted vault with master password, CSV import, and optional local web interface.
 "@

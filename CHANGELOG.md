@@ -1,4 +1,8 @@
 # Changelog
+## [2.1.1] - 2026-03-12
+
+### Added
+- Add `Start-TinyVaultWeb` to easily start the web server
 
 ## [2.0.1] - 2026-03-08
 

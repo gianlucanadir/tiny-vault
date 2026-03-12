@@ -1,3 +1,13 @@
+<#
+.SYNOPSIS
+Install the TinyVault Web Server
+
+.DESCRIPTION
+Downloads Start-TinyVaultWeb.ps1, TinyVault.bat and tinyvault.html to $home\.tinyvault\web
+
+.EXAMPLE
+Install-TinyVaultWeb
+#>
 function Install-TinyVaultWeb {
     [CmdletBinding()]
     param()

@@ -37,6 +37,7 @@ Install-Module TinyVault
 | `Import-TinyVaultCsv` | Import entries from a CSV file |
 | `Set-TinyVaultMasterPassword` | Change the vault master password |
 | `Install-TinyVaultWeb` | Download and install the web interface |
+| `Start-TinyVaultWeb` | Start the TinyVault web server
 
 ## Usage
 
@@ -65,6 +66,9 @@ Import-TinyVaultCsv -CsvFile ".\credentials.csv"
 
 # Download web server and html
 Install-TinyVaultWeb
+
+# Start the TinyVaylt web Server
+Start-TinyVaultWeb
 ```
 
 ## CSV Format
