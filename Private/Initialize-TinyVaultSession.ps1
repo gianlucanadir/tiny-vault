@@ -12,7 +12,8 @@ function Initialize-TinyVaultSession {
 "@
     $latest = (Find-Module TinyVault).Version
     $current = (Import-PowerShellDataFile "$PSScriptRoot\..\TinyVault.psd1").ModuleVersion
-    Write-Host "Current Version: $current"
+    Write-Host "Current Version: " -NoNewline
+    Write-Host $current -ForegroundColor Green
 
     if ($latest -gt $current) {
         Write-Host "New version available: $latest. Run 'Update-Module TinyVault' to update." -ForegroundColor Yellow
