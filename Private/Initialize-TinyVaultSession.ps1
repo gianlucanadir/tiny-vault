@@ -1,7 +1,27 @@
 function Initialize-TinyVaultSession {
+    Write-Host -ForegroundColor Blue @"
+
+
+████████╗██╗███╗   ██╗██╗   ██╗██╗   ██╗ █████╗ ██╗   ██╗██╗     ████████╗
+╚══██╔══╝██║████╗  ██║╚██╗ ██╔╝██║   ██║██╔══██╗██║   ██║██║     ╚══██╔══╝
+   ██║   ██║██╔██╗ ██║ ╚████╔╝ ██║   ██║███████║██║   ██║██║        ██║   
+   ██║   ██║██║╚██╗██║  ╚██╔╝  ╚██╗ ██╔╝██╔══██║██║   ██║██║        ██║   
+   ██║   ██║██║ ╚████║   ██║    ╚████╔╝ ██║  ██║╚██████╔╝███████╗   ██║   
+   ╚═╝   ╚═╝╚═╝  ╚═══╝   ╚═╝     ╚═══╝  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝   
+        
+"@
+    $latest = (Find-Module TinyVault).Version
+    $current = (Import-PowerShellDataFile "$PSScriptRoot\..\TinyVault.psd1").ModuleVersion
+    Write-Host "Current Version: $current"
+
+    if ($latest -gt $current) {
+        Write-Host "New version available: $latest. Run 'Update-Module TinyVault' to update." -ForegroundColor Yellow
+    }
+
     $script:MasterPassword = Read-Host -AsSecureString "TinyVault Master Password"
     if ($script:MasterPassword.Length -eq 0) {
         Write-Host "Master password is required."
         Initialize-TinyVaultSession
     }
+
 }
