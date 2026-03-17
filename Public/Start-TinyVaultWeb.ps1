@@ -15,7 +15,7 @@ function Start-TinyVaultWeb {
     $path = "$home\.tinyvault\web\Start-TinyVaultWeb.ps1"
 
     if (Test-Path $path) {
-        Start-Process pwsh -ArgumentList "-File $path"
+        . $path
     }
     else {
         Write-Error "Web server not found at $path. Run Install-TinyVaultWeb to download it."

@@ -1,4 +1,9 @@
 # Changelog
+## [2.2.3] - 2026-03-12
+
+### Added
+- Fix Start-TinyVaultWeb function
+
 ## [2.2.2] - 2026-03-12
 
 ### Added
