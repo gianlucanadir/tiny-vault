@@ -1,4 +1,10 @@
 # Changelog
+
+## [2.2.1] - 2026-03-12
+
+### Added
+- Add ASCII splash screen and current/latest version info
+
 ## [2.1.1] - 2026-03-12
 
 ### Added
