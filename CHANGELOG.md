@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2.4] - 2026-03-19
+## [2.2.5] - 2026-03-19
 
 ### Added
 - Add check latest version
