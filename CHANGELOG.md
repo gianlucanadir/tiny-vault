@@ -1,4 +1,10 @@
 # Changelog
+
+## [2.2.4] - 2026-03-19
+
+### Added
+- Remove check latest version
+
 ## [2.2.3] - 2026-03-12
 
 ### Added

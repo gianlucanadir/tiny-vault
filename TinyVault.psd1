@@ -12,7 +12,7 @@
     RootModule        = 'TinyVault.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '2.2.3'
+    ModuleVersion     = '2.2.4'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -118,6 +118,7 @@
 
             # ReleaseNotes of this module
             ReleaseNotes = @"
+            2.2.4: Remove check latest version
             2.2.3: Fix Start-TinyVaultWeb function
             2.2.2: Minor fix
             2.2.1: Add ASCII splash screen and current/latest version info
